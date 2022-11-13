@@ -15,6 +15,7 @@ import java.util.function.BiPredicate;
 import java.util.function.Consumer;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -52,7 +53,8 @@ public class EventListeners implements ActionListener {
 									((JTextField) parent.getComponents()[3]).getText(),
 									((JTextField) parent.getComponents()[4]).getText(),
 									((JTextField) parent.getComponents()[5]).getText(),
-									((JTextField) parent.getComponents()[6]).getText()
+									((JTextField) parent.getComponents()[6]).getText(),
+									((JTextField) parent.getComponents()[7]).getText()
 							);
 					DataDisplayManager.loadFromList(FinalProject.CENTRAL.getFlights());
 					FinalProject.CENTRAL.store(ConnectTo_Database.getInstance().getTable());
@@ -88,6 +90,25 @@ public class EventListeners implements ActionListener {
 						FinalProject.LANG.setSpecificLanguage(Locale.US);
 					GUI.createSecondPanel(parent);
 					DataDisplayManager.loadFromList(FinalProject.CENTRAL.getFlights());
+				});
+				namedMap.put(FinalProject.LANG.filter("Issue Ticket"), parent ->{
+					int row = DataDisplayManager.getTable().getSelectedRow();
+					Flight f = FinalProject.CENTRAL.getFlights().get(row);
+					JFrame nFrame = new JFrame("Info");
+					nFrame.setBounds(100, 100, 500, 100);
+					nFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+					JLabel label = new JLabel();
+					nFrame.add(label);
+					if(f.isFull()) {
+						label.setText("Warning cannot issue ticket");
+					}else {
+						label.setText("Ticket issued successfully");
+						f.setAvailableSeats(f.getAvailableSeats() - 1);
+						
+					}
+					nFrame.setVisible(true);
+					DataDisplayManager.loadFromList(FinalProject.CENTRAL.getFlights());
+					FinalProject.CENTRAL.store(ConnectTo_Database.getInstance().getTable());
 				});
 			}
 

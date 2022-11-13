@@ -28,6 +28,7 @@ public class ConnectTo_Database {
 			new Column<Integer>("flightDuration", "") {},
 			new Column<Integer>("totalSeats", "") {},
 			new Column<Integer>("flightCost", "") {},
+			new Column<Integer>("availableSeats", "") {}
 			};
 		return column;
 	}

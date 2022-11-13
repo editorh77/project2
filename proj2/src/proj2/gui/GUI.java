@@ -32,7 +32,7 @@ public class GUI {
 	
 	public static void createSecondPanel(Container cont) {
 		cont.removeAll();
-		String[] names = {"Flight Number", "Flight Name", "Flight Origin", "Flight Destination", "Flight Duration", "Total Seats", "Flight Cost"};
+		String[] names = {"Flight Number", "Flight Name", "Flight Origin", "Flight Destination", "Flight Duration", "Total Seats", "Flight Cost", "Available Seats"};
 		int x = 100; int y = 50; int z = 0;
 		for(String name : names) {
 			JTextField tf = new JTextField(FinalProject.LANG.filter(name));
@@ -40,8 +40,8 @@ public class GUI {
 			cont.add(tf);
 			z+=x;
 		}
-		String[] buttons = {"Add Flight", "Set Flight", "Remove Flight", "Sort Number", "Sort Name", "Eng/Fre"};
-		int[][] bounds = {{0, 50}, {100, 50}, {200, 50}, {0, 300}, {0, 350}, {0, 400}};
+		String[] buttons = {"Add Flight", "Set Flight", "Remove Flight", "Sort Number", "Sort Name", "Eng/Fre", "Issue Ticket"};
+		int[][] bounds = {{0, 50}, {100, 50}, {200, 50}, {0, 300}, {0, 350}, {0, 400}, {0, 450}};
 		for(int i = 0; i < buttons.length; i++) {
 			JButton button = new JButton(FinalProject.LANG.filter(buttons[i]));
 			button.setBounds(bounds[i][0], bounds[i][1], x, y);

@@ -31,10 +31,10 @@ public class DataDisplayManager {
 	
 	public static void loadFromList(List<Flight> flights) {
 		int i = 0;
-		String[] columns = FinalProject.LANG.filter(new String[]{"Number", "Name", "Origin", "Destination", "Duration", "Total Seats", "Cost"});
+		String[] columns = FinalProject.LANG.filter(new String[]{"Number", "Name", "Origin", "Destination", "Duration", "Total Seats", "Cost", "Available Seats", "Is Full"});
 		String [][] datas = new String[flights.size()][columns.length];
 		for(Flight flight : flights) {
-			String[] data = {flight.getFlightNumber()+"", flight.getFlightName(), flight.getFlightOrigin(), flight.getFlightDestination(), flight.getFlightDuration() +"", flight.getTotalSeats() +"", flight.getFlightCost()+""};
+			String[] data = {flight.getFlightNumber()+"", flight.getFlightName(), flight.getFlightOrigin(), flight.getFlightDestination(), flight.getFlightDuration() +"", flight.getTotalSeats() +"", flight.getFlightCost()+"", flight.getAvailableSeats() +"", flight.isFull() + ""};
 			datas[i] = data;
 			i++;
 		}

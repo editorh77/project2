@@ -11,10 +11,11 @@ public class Flight {
 	private int flightDuration;
 	private int totalSeats;
 	private int flightCost;
+	private int availableSeats;
 	private boolean full;
 	
 	public Flight(int flightNumber, String flightName, String flightOrigin, String flightDestination,
-			int flightDuration, int totalSeats, int flightCost) {
+			int flightDuration, int totalSeats, int flightCost, int availableSeats) {
 		super();
 		this.flightNumber = flightNumber;
 		this.flightName = flightName;
@@ -23,6 +24,8 @@ public class Flight {
 		this.flightDuration = flightDuration;
 		this.totalSeats = totalSeats;
 		this.flightCost = flightCost;
+		this.setAvailableSeats(availableSeats);
+		this.full = availableSeats <= 0;
 	}
 	
 	/**
@@ -125,6 +128,8 @@ public class Flight {
 			setFlightDuration((Integer) table.getByName("flightDuration", row));
 			setTotalSeats((Integer) table.getByName("totalSeats", row));
 			setFlightCost((Integer) table.getByName("flightCost", row));
+			setAvailableSeats((Integer) table.getByName("availableSeats", row));
+			setFull(availableSeats <= 0);
 		}
 		return this;
 	}
@@ -145,7 +150,8 @@ public class Flight {
 				(String) table.getByName("flightDestination", row),
 				(Integer) table.getByName("flightDuration", row),
 				(Integer) table.getByName("totalSeats", row),
-				(Integer) table.getByName("flightCost", row)
+				(Integer) table.getByName("flightCost", row),
+				(Integer) table.getByName("availableSeats", row)
 				);
 		return fl;
 	}
@@ -154,7 +160,16 @@ public class Flight {
 	 * debug purposes
 	 */
 	public String toString() {
-		return flightNumber + " " + flightName + " " + flightOrigin + " " + flightDestination + " " + flightDuration + " " + totalSeats + " " + flightCost;
+		return flightNumber + " " + flightName + " " + flightOrigin + " " + flightDestination + " " + flightDuration + " " + totalSeats + " " + flightCost + " " + availableSeats + " " + isFull();
+	}
+
+	public int getAvailableSeats() {
+		return availableSeats;
+	}
+
+	public void setAvailableSeats(int availableSeats) {
+		this.availableSeats = availableSeats;
+		if(availableSeats <= 0) setFull(true);
 	}
 
 }

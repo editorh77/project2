@@ -36,20 +36,20 @@ public class FlightController {
 	}
 	
 	public Flight produce(int flightNumber, String flightName, String flightOrigin, String flightDestination,
-			int flightDuration, int totalSeats, int flightCost) {
-		Flight fl = new Flight(flightNumber, flightName, flightOrigin, flightDestination, flightDuration, totalSeats, flightCost);
+			int flightDuration, int totalSeats, int flightCost, int availableSeats) {
+		Flight fl = new Flight(flightNumber, flightName, flightOrigin, flightDestination, flightDuration, totalSeats, flightCost, availableSeats);
 		flights.add(fl);
 		return fl;
 	}
 	
-	public Flight produce(String flightNumber, String flightName, String flightOrigin, String flightDestination, String flightDuration, String totalSeats, String flightCost) {
-		return produce(Integer.parseInt(flightNumber), flightName, flightOrigin, flightDestination, Integer.parseInt(flightDuration), Integer.parseInt(totalSeats), Integer.parseInt(flightCost));
+	public Flight produce(String flightNumber, String flightName, String flightOrigin, String flightDestination, String flightDuration, String totalSeats, String flightCost, String availableSeats) {
+		return produce(Integer.parseInt(flightNumber), flightName, flightOrigin, flightDestination, Integer.parseInt(flightDuration), Integer.parseInt(totalSeats), Integer.parseInt(flightCost), Integer.parseInt(availableSeats));
 	}
 	
 	public void store(Table table) {
 		table.delete();
 		for(Flight flight : flights) {
-			table.insert("", table.getColumns(), flight.getFlightNumber(), flight.getFlightName(), flight.getFlightOrigin(), flight.getFlightDestination(), flight.getFlightDuration(), flight.getTotalSeats(), flight.getFlightCost());
+			table.insert("", table.getColumns(), flight.getFlightNumber(), flight.getFlightName(), flight.getFlightOrigin(), flight.getFlightDestination(), flight.getFlightDuration(), flight.getTotalSeats(), flight.getFlightCost(), flight.getAvailableSeats());
 		}
 	}
 	
