@@ -5,8 +5,8 @@ import proj2.gui.Window;
 
 public class ViewFlight {
 	
-	public static void beginVisuals() {
-		GUI.begin();
+	public String toString(FlightController flight) {
+		return flight.getFlightNumber() + " " + flight.getFlightName() + " " + flight.getFlightOrigin() + " " + flight.getFlightDestination() + " " + flight.getFlightDuration() + " " + flight.getTotalSeats() + " " + flight.getFlightCost() + " " + flight.getAvailableSeats() + " " + flight.isFull();
 	}
 
 }

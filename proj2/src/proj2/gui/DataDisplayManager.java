@@ -6,6 +6,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import proj2.Flight;
+import proj2.FlightController;
 import proj2.FinalProject;
 
 public class DataDisplayManager {
@@ -29,11 +30,11 @@ public class DataDisplayManager {
 		if(dataTable.getParent() != null) dataTable.getParent().update(dataTable.getParent().getGraphics());
 	}
 	
-	public static void loadFromList(List<Flight> flights) {
+	public static void loadFromList(List<FlightController> flights) {
 		int i = 0;
 		String[] columns = FinalProject.LANG.filter(new String[]{"Number", "Name", "Origin", "Destination", "Duration", "Total Seats", "Cost", "Available Seats", "Is Full"});
 		String [][] datas = new String[flights.size()][columns.length];
-		for(Flight flight : flights) {
+		for(FlightController flight : flights) {
 			String[] data = {flight.getFlightNumber()+"", flight.getFlightName(), flight.getFlightOrigin(), flight.getFlightDestination(), flight.getFlightDuration() +"", flight.getTotalSeats() +"", flight.getFlightCost()+"", flight.getAvailableSeats() +"", flight.isFull() + ""};
 			datas[i] = data;
 			i++;

@@ -13,32 +13,6 @@ public class Flight {
 	private int flightCost;
 	private int availableSeats;
 	private boolean full;
-	
-	public Flight(int flightNumber, String flightName, String flightOrigin, String flightDestination,
-			int flightDuration, int totalSeats, int flightCost, int availableSeats) {
-		super();
-		this.flightNumber = flightNumber;
-		this.flightName = flightName;
-		this.flightOrigin = flightOrigin;
-		this.flightDestination = flightDestination;
-		this.flightDuration = flightDuration;
-		this.totalSeats = totalSeats;
-		this.flightCost = flightCost;
-		this.setAvailableSeats(availableSeats);
-		this.full = availableSeats <= 0;
-	}
-	
-	/**
-	 * 
-	 * Factory production method
-	 * 
-	 * @param table
-	 */
-	public Flight(Table table) {
-		int pos = table.position();
-		load(table, pos);
-		table.advance();
-	}
 
 	public long getFlightNumber() {
 		return flightNumber;
@@ -112,52 +86,12 @@ public class Flight {
 		return this;
 	}
 	
-	/**
-	 * 
-	 * OOP loading method
-	 * 
-	 * @param table
-	 * @param row
-	 */
-	public Flight load(Table table, int row) {
-		if(!table.isEmpty()) {
-			setFlightNumber((Integer) table.getByName("flightNumber", row));
-			setFlightName((String) table.getByName("flightName", row));
-			setFlightOrigin((String) table.getByName("flightOrigin", row));
-			setFlightDestination((String) table.getByName("flightDestination", row));
-			setFlightDuration((Integer) table.getByName("flightDuration", row));
-			setTotalSeats((Integer) table.getByName("totalSeats", row));
-			setFlightCost((Integer) table.getByName("flightCost", row));
-			setAvailableSeats((Integer) table.getByName("availableSeats", row));
-			setFull(availableSeats <= 0);
-		}
-		return this;
-	}
 	
 	/**
+	 * debug purposes only
+	 * do not use
 	 * 
-	 * static method in the event that a manual receiving transaction needs to be done
-	 * 
-	 * @param table
-	 * @param row
-	 * @return
-	 */
-	public static Flight loadFromDB(Table table, int row) {
-		Flight fl = new Flight(
-				(Integer) table.getByName("flightNumber", row), 
-				(String) table.getByName("flightName", row),
-				(String) table.getByName("flightOrigin", row),
-				(String) table.getByName("flightDestination", row),
-				(Integer) table.getByName("flightDuration", row),
-				(Integer) table.getByName("totalSeats", row),
-				(Integer) table.getByName("flightCost", row),
-				(Integer) table.getByName("availableSeats", row)
-				);
-		return fl;
-	}
-	
-	/**
-	 * debug purposes
+	 * @deprecated
 	 */
 	public String toString() {
 		return flightNumber + " " + flightName + " " + flightOrigin + " " + flightDestination + " " + flightDuration + " " + totalSeats + " " + flightCost + " " + availableSeats + " " + isFull();
@@ -167,9 +101,11 @@ public class Flight {
 		return availableSeats;
 	}
 
-	public void setAvailableSeats(int availableSeats) {
+	public Flight setAvailableSeats(int availableSeats) {
 		this.availableSeats = availableSeats;
 		if(availableSeats <= 0) setFull(true);
+		else setFull(true);
+		return this;
 	}
 
 }

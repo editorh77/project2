@@ -24,6 +24,7 @@ import javax.swing.JTextField;
 
 import proj2.ConnectTo_Database;
 import proj2.Flight;
+import proj2.FlightController;
 import proj2.FinalProject;
 import proj2.Organizer;
 
@@ -67,7 +68,8 @@ public class EventListeners implements ActionListener {
 						setFlightDestination(((JTextField) parent.getComponents()[3]).getText()).
 						setFlightDuration(Integer.parseInt(((JTextField) parent.getComponents()[4]).getText())).
 						setTotalSeats(Integer.parseInt(((JTextField) parent.getComponents()[5]).getText())).
-						setFlightCost(Integer.parseInt(((JTextField) parent.getComponents()[6]).getText()));
+						setFlightCost(Integer.parseInt(((JTextField) parent.getComponents()[6]).getText())).
+						setAvailableSeats(Integer.parseInt(((JTextField) parent.getComponents()[7]).getText()));
 					DataDisplayManager.loadFromList(FinalProject.CENTRAL.getFlights());
 					FinalProject.CENTRAL.store(ConnectTo_Database.getInstance().getTable());
 				});
@@ -76,7 +78,7 @@ public class EventListeners implements ActionListener {
 					DataDisplayManager.loadFromList(FinalProject.CENTRAL.getFlights());
 					FinalProject.CENTRAL.store(ConnectTo_Database.getInstance().getTable());
 				});
-				Consumer<BiPredicate<Flight, Flight>> sorting = b -> {FinalProject.CENTRAL.sort(b); DataDisplayManager.loadFromList(FinalProject.CENTRAL.getFlights());};
+				Consumer<BiPredicate<FlightController, FlightController>> sorting = b -> {FinalProject.CENTRAL.sort(b); DataDisplayManager.loadFromList(FinalProject.CENTRAL.getFlights());};
 				namedMap.put(FinalProject.LANG.filter("Sort Number"), parent -> {
 					sorting.accept(Organizer.COMPARE_NUMBER);
 				});
@@ -93,7 +95,7 @@ public class EventListeners implements ActionListener {
 				});
 				namedMap.put(FinalProject.LANG.filter("Issue Ticket"), parent ->{
 					int row = DataDisplayManager.getTable().getSelectedRow();
-					Flight f = FinalProject.CENTRAL.getFlights().get(row);
+					FlightController f = FinalProject.CENTRAL.getFlights().get(row);
 					JFrame nFrame = new JFrame("Info");
 					nFrame.setBounds(100, 100, 500, 100);
 					nFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
